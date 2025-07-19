@@ -71,26 +71,26 @@ def theta(m, D0):
     return ret
 
 # Now, we extend to discriminants D = D0*f^2 with conductor f >= 1.
-# Let u_{-3} = 6, u_{-4} = 4, and O_D0_x = 2 for D0 <= -7
-# We know that if O_D has exponent E, then L(f) | 12 E O_D0_x. (Lemma)
-# So we compute the finite list of such "f candidates".
+# Let u_{-3} = 6, u_{-4} = 4, and u_D0 = 2 for D0 <= -7
+# We know that if O_D has exponent E, then L(f) | 12 E u_D0. (Lemma)
+# So we compute the complete list of such "f candidates".
 
-# compute the complete list of f such that L(f) | 12 E O_D0_x
+# compute the complete list of f candidates: the f such that L(f) | 12 E u_D0
 def compute_f_candidates(D0, E):
-    if   D0 == -3: O_D0_x = 6
-    elif D0 == -4: O_D0_x = 4
-    else:          O_D0_x = 2
-    _12_E_OD0x = 12 * E * O_D0_x
+    if   D0 == -3: u_D0 = 6
+    elif D0 == -4: u_D0 = 4
+    else:          u_D0 = 2
+    _12_E_uD0 = 12 * E * u_D0
     # We know that  f | theta(L(f)). (Lemma)
-    # So the only possible candidates f are divisors of theta(L) for L | 12 E O_D0_x.
+    # So the only possible candidates f are divisors of theta(L) for L | 12 E u_D0.
     f_precandidates = set()
-    for L in divisors(_12_E_OD0x):
+    for L in divisors(_12_E_uD0):
         for f in divisors(theta(L, D0)):
             f_precandidates.add(f)
 
     cands = []
     for f in f_precandidates:
-        if _12_E_OD0x  % get_L(f, D0) == 0:
+        if _12_E_uD0  % get_L(f, D0) == 0:
             cands.append(f)
     cands.sort()
     return cands
