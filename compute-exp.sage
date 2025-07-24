@@ -82,7 +82,7 @@ def compute_f_candidates(D0, E):
     else:          u_D0 = 2
     _12_E_uD0 = 12 * E * u_D0
     # We know that  f | theta(L(f)). (Lemma)
-    # So the only possible candidates f are divisors of theta(L) for L | 12 E u_D0.
+    # So the only possible candidates f are divisors of theta(m) for m | 12 E u_D0.
     f_precandidates = set()
     for L in divisors(_12_E_uD0):
         for f in divisors(theta(L, D0)):
